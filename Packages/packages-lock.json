@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.alontalmi.customattributes": {
+      "version": "https://github.com/Phoder1/Unity-CustomAttributes.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "84bcd53e2b2974c49c70736d015ab5f4cf6e633e"
+    },
+    "com.alontalmi.odincustomattributes": {
+      "version": "https://github.com/Phoder1/PersistentData.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "82f77455230716d9855f295b3343455bc555a1a4"
+    },
     "com.autodesk.fbx": {
       "version": "4.1.1",
       "depth": 2,

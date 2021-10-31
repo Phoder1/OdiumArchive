@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.alontalmi.customattributes": "https://github.com/Phoder1/Unity-CustomAttributes.git",
+    "com.alontalmi.odincustomattributes": "https://github.com/Phoder1/PersistentData.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "1.13.5",
     "com.unity.feature.characters-animation": "1.0.0",
