@@ -9,6 +9,17 @@
 [Uu]ser[Ss]ettings/
 [Rr]ecordings/
 [Rr]ecording/
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Mm]emoryCaptures/
+/[Aa]ssets/AssetStoreTools*
+/[Uu]ser[Ss]ettings/
+/[Rr]ecordings/
+/[Rr]ecording/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -56,6 +67,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.log
+.*.log
 
 Assets/ThirdParty/Sisus/Hierarchy Folders/Code/Editor/PowerInspectorIntegration/PowerInspectorIntegrationPackage.unitypackage.meta
 Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabUnitySdk.unitypackage.meta

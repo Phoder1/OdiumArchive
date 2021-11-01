@@ -1,7 +1,9 @@
 {
     "name": "Main",
     "rootNamespace": "WizardParty",
-    "references": [],
+    "references": [
+        "GUID:19a9b407c516c1041a80ff5100bc4ded"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

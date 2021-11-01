@@ -1,23 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace WizardParty.Input
 {
-    public class SampleInput : MonoBehaviour
+    public class SampleInput : DebugBehaviour
     {
-        [SerializeField]
-        private SampleScript sampleScript;
         // Start is called before the first frame update
         void Start()
         {
-        
-        }
+            transform.DOMove(transform.position + Vector3.up * 3, 1).SetLoops(-1, LoopType.Yoyo);
 
-        // Update is called once per frame
-        void Update()
+#if UNITY_EDITOR
+            if (_debuggingEnabled)
+            {
+                LogToFilter("Test", "Test");
+            }
+#endif
+        }
+        private void Update()
         {
-        
+#if UNITY_EDITOR
+            if (_debuggingEnabled)
+            {
+                Watch("Test", transform.position.y.ToString());
+            }
+#endif
         }
     }
 }
