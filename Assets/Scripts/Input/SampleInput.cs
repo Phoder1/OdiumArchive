@@ -5,10 +5,11 @@ namespace WizardParty.Input
 {
     public class SampleInput : DebugBehaviour
     {
+        Tween _tween;
         // Start is called before the first frame update
-        void Start()
+        void OnEnable()
         {
-            transform.DOMove(transform.position + Vector3.up * 3, 1).SetLoops(-1, LoopType.Yoyo);
+            _tween = transform.DOMove(transform.position + Vector3.up * 3, 1).SetLoops(-1, LoopType.Yoyo);
 
 #if UNITY_EDITOR
             if (_debuggingEnabled)
@@ -25,6 +26,11 @@ namespace WizardParty.Input
                 Watch("Test", transform.position.y.ToString());
             }
 #endif
+        }
+        private void OnDisable()
+        {
+            if (_tween.IsActive())
+                _tween.Kill();
         }
     }
 }
