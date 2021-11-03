@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -13,7 +14,7 @@ namespace WizardParty.Async
         public void CancelAllTasks() => taskGroup.CancelAllTasks();
         public Task StartTask(TaskFunc taskFunc, CancellationToken? cancellationToken = null)
             => taskGroup.StartTask(taskFunc, cancellationToken);
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             taskGroup.Dispose();
         }

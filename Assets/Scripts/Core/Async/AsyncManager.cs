@@ -16,13 +16,6 @@ namespace WizardParty.Async
         static AsyncManager()
         {
             SceneManager.sceneUnloaded += SceneManager_sceneUnloaded;
-            Application.quitting += Application_quitting;
-        }
-
-        private static void Application_quitting()
-        {
-            //Must dispose all task groups! otherwise stupid async methods will keep running...
-            TaskGroup.DisposeAll();
         }
 
         private static void SceneManager_sceneUnloaded(Scene arg0)

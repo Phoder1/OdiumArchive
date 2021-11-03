@@ -11,8 +11,8 @@ namespace WizardParty.Async
         // Start is called before the first frame update
         async void Start()
         {
-            await StartTask(LogSeconds);
-            Debug.Log("Finished!");
+            await AsyncManager.GlobalTaskGroup.StartTask(LogSeconds);
+            TaskHelper.DebugAsyncLog("Finished!");
         }
         [Button]
         private void Destroy()
@@ -22,7 +22,6 @@ namespace WizardParty.Async
             cancellationToken.ThrowIfNotValid();
 
             int time = 0;
-            Debug.Log("Started logging seconds!");
 
             try
             {
@@ -35,7 +34,7 @@ namespace WizardParty.Async
             }
             catch (OperationCanceledException e) when (cancellationToken.IsCancellationRequested)
             {
-                Debug.LogException(e);
+                e.DebugAsyncLog();
             }
         }
     }

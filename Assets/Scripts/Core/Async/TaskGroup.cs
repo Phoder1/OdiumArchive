@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace WizardParty.Async
 {
@@ -15,6 +16,13 @@ namespace WizardParty.Async
         public TaskGroup()
         {
             OnDisposeAll += Dispose;
+            Application.quitting += Application_quitting;
+        }
+
+        private static void Application_quitting()
+        {
+            //Must dispose all task groups! otherwise stupid async methods will keep running...
+            DisposeAll();
         }
         public static void DisposeAll()
         {
@@ -36,6 +44,9 @@ namespace WizardParty.Async
                 token = Token;
             }
 
+#if UNITY_EDITOR
+            TaskHelper.DebugAsyncLog("Task started");
+#endif
             return taskFunc.Invoke(token);
         }
 
@@ -53,6 +64,7 @@ namespace WizardParty.Async
             if (_disposed)
                 return;
 
+            Application.quitting -= Application_quitting;
             using (_tokensSource)
             {
                 _tokensSource.Cancel();
@@ -60,7 +72,6 @@ namespace WizardParty.Async
             _tokensSource = null;
             _disposed = true;
         }
-
         ~TaskGroup()
         {
             Dispose();
