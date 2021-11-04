@@ -2,6 +2,7 @@
   "dependencies": {
     "com.alontalmi.customattributes": "https://github.com/Phoder1/Unity-CustomAttributes.git",
     "com.alontalmi.odincustomattributes": "https://github.com/Phoder1/PersistentData.git",
+    "com.phoder1.asyncmanagement": "https://github.com/Phoder1/AsyncManagement.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.addressables": "1.19.11",
     "com.unity.collab-proxy": "1.13.5",
@@ -16,7 +17,7 @@
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.6.3",
     "com.unity.ugui": "1.0.0",
-    "com.unity.visualscripting": "1.7.5",
+    "dev.n5y.asmdefhelper": "https://github.com/naninunenoy/AsmdefHelper.git?path=Assets",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
