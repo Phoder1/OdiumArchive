@@ -1,5 +1,5 @@
 {
-    "name": "Main.Editor",
+    "name": "WizardParty.Editor",
     "rootNamespace": "WizardParty.Editor",
     "references": [
         "GUID:b25774ed6c81d1045bcc0d0082f4560b"
