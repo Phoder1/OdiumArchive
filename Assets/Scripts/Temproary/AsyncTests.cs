@@ -1,10 +1,11 @@
+using Phoder1.AsyncManagement;
 using Sirenix.OdinInspector;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace WizardParty.Async
+namespace WizardParty
 {
     public class AsyncTests : AsyncBehaviour
     {
