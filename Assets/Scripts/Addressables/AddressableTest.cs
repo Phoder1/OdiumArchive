@@ -14,66 +14,50 @@ namespace WizardParty.AddressablesManagement
 
         [SerializeField]
         AssetLabelReference[] _labelRefs;
-        public IList<IResourceLocation> AssetLocation { get; } = new List<IResourceLocation>();
+        public List<IResourceLocation> AssetLocation1 { get; set; }
+   
         public List<GameObject> objects = new List<GameObject>();
+
+        GameObject _object;
         [Button()]
         public async void LoadObject1()
         {
-            await InstaniateObject(0);
-        }
-        [Button()]
-        public async void LoadObject2()
-        {
-           await InstaniateObject(1);
-        }
+            
+            if (_object == null)
+            {
+                AssetLocation1 = new List<IResourceLocation>();
+              await  AddressableHandler.LoadResourceLocationsAsync(AssetLocation1, _labelRefs[0]);
+                _object = await Addressables.LoadAssetAsync<GameObject>(AssetLocation1[0]).Task;
+                
+            }
 
-
+          Instantiate(_object);
+         
+        }
 
         [Button()]
         public void ReleaseMemory()
         {
-            foreach (var o in objects)
-               Destroy(o);
-
-            objects.Clear();
+            Addressables.Release(AssetLocation1);
+        } 
+        [Button()]
+        public void ReleaseMemoryAndDestroy()
+        {
+        
+            Addressables.ReleaseInstance(_object);
+           Addressables.Release(AssetLocation1);
         }
-
 
         [Button()]
         public void LoadScene(int scene)
-            => SceneManager.LoadScene(scene);
+            => Addressables.LoadSceneAsync(scene);
 
 
-
-
-
-
-
-        private async Task InstaniateObject(int index)
+        private void OnDestroy()
         {
-            await AddressableHandler.LoadResourceLocationsAsync(AssetLocation, _labelRefs[index].labelString);
-
-
-            var task = Addressables.LoadAssetAsync<GameObject>(AssetLocation[0]);
-            var obj = await task.Task;
-            objects.Add( Instantiate(obj));
+            ReleaseMemory();
         }
 
-        List<GameObject> _gameObjectsList = new List<GameObject>();
-
-        void Start()
-        {
-           // Initiate();
-        }
-        public async Task Initiate()
-        {
-            await AddressableHandler.LoadResourceLocationsAsync(AssetLocation, _labelRefs);
-
-            foreach (var asset in AssetLocation)
-            {
-                Debug.Log(asset.ToString());
-            }
-        }
 
     }
 
