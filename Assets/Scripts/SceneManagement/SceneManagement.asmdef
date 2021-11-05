@@ -1,5 +1,5 @@
 {
-    "name": "SceneManagement",
+    "name": "WizardParty.SceneManagement",
     "rootNamespace": "WizardParty.SceneManagement",
     "references": [
         "GUID:b25774ed6c81d1045bcc0d0082f4560b"
