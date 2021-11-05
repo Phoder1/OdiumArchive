@@ -3,7 +3,11 @@ using System;
 
 namespace WizardParty
 {
+    public static class GroupsOrder
+    {
+        public const int Events = 999;
+    }
     [IncludeMyAttributes]
-    [FoldoutGroup("Events")]
+    [FoldoutGroup("Events", GroupsOrder.Events)]
     public class EventsGroup : Attribute { }
 }

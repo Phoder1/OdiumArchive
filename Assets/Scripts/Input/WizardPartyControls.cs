@@ -34,9 +34,18 @@ namespace WizardParty.Input
                     ""type"": ""Value"",
                     ""id"": ""a1adc656-b353-4223-a47e-8b3830aa3b68"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""c28439a0-eb0c-44a8-a6e7-edd8cf0cd311"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -57,7 +66,7 @@ namespace WizardParty.Input
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -68,7 +77,7 @@ namespace WizardParty.Input
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -79,7 +88,7 @@ namespace WizardParty.Input
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -90,10 +99,49 @@ namespace WizardParty.Input
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4911387-9e59-44b8-beed-cec72db1d0e4"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gameplay"",
+            ""id"": ""e7b5e9a4-9cfb-4682-8e2c-cbf857fde454"",
+            ""actions"": [
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""12393369-9251-4b95-8543-2c060831cff7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e5509ead-bbce-4a35-ad2c-ac1717cbc541"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +168,10 @@ namespace WizardParty.Input
             // Locomotion
             m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
             m_Locomotion_Move = m_Locomotion.FindAction("Move", throwIfNotFound: true);
+            m_Locomotion_Roll = m_Locomotion.FindAction("Roll", throwIfNotFound: true);
+            // Gameplay
+            m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
+            m_Gameplay_Mouse = m_Gameplay.FindAction("Mouse", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -180,11 +232,13 @@ namespace WizardParty.Input
         private readonly InputActionMap m_Locomotion;
         private ILocomotionActions m_LocomotionActionsCallbackInterface;
         private readonly InputAction m_Locomotion_Move;
+        private readonly InputAction m_Locomotion_Roll;
         public struct LocomotionActions
         {
             private @WizardPartyControls m_Wrapper;
             public LocomotionActions(@WizardPartyControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Locomotion_Move;
+            public InputAction @Roll => m_Wrapper.m_Locomotion_Roll;
             public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -197,6 +251,9 @@ namespace WizardParty.Input
                     @Move.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnMove;
+                    @Roll.started -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnRoll;
+                    @Roll.performed -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnRoll;
+                    @Roll.canceled -= m_Wrapper.m_LocomotionActionsCallbackInterface.OnRoll;
                 }
                 m_Wrapper.m_LocomotionActionsCallbackInterface = instance;
                 if (instance != null)
@@ -204,10 +261,46 @@ namespace WizardParty.Input
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Roll.started += instance.OnRoll;
+                    @Roll.performed += instance.OnRoll;
+                    @Roll.canceled += instance.OnRoll;
                 }
             }
         }
         public LocomotionActions @Locomotion => new LocomotionActions(this);
+
+        // Gameplay
+        private readonly InputActionMap m_Gameplay;
+        private IGameplayActions m_GameplayActionsCallbackInterface;
+        private readonly InputAction m_Gameplay_Mouse;
+        public struct GameplayActions
+        {
+            private @WizardPartyControls m_Wrapper;
+            public GameplayActions(@WizardPartyControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Mouse => m_Wrapper.m_Gameplay_Mouse;
+            public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+            public void SetCallbacks(IGameplayActions instance)
+            {
+                if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
+                {
+                    @Mouse.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
+                    @Mouse.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
+                    @Mouse.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouse;
+                }
+                m_Wrapper.m_GameplayActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Mouse.started += instance.OnMouse;
+                    @Mouse.performed += instance.OnMouse;
+                    @Mouse.canceled += instance.OnMouse;
+                }
+            }
+        }
+        public GameplayActions @Gameplay => new GameplayActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -220,6 +313,11 @@ namespace WizardParty.Input
         public interface ILocomotionActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnRoll(InputAction.CallbackContext context);
+        }
+        public interface IGameplayActions
+        {
+            void OnMouse(InputAction.CallbackContext context);
         }
     }
 }

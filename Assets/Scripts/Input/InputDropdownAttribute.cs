@@ -7,6 +7,13 @@ namespace WizardParty.Input.Runtime
     [ValueDropdown("@InputDropdownAttribute.ActionsDropdown")]
     public class InputDropdownAttribute : Attribute
     {
+        public Type ActionType;
+
+        public InputDropdownAttribute(Type actionType)
+        {
+            ActionType = actionType ?? throw new ArgumentNullException(nameof(actionType));
+        }
+
         public static ValueDropdownList<string> ActionsDropdown
         {
             get
