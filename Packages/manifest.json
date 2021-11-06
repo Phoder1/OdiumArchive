@@ -2,7 +2,6 @@
   "dependencies": {
     "com.alontalmi.customattributes": "https://github.com/Phoder1/Unity-CustomAttributes.git",
     "com.alontalmi.odincustomattributes": "https://github.com/Phoder1/PersistentData.git",
-    "com.phoder1.asyncmanagement": "https://github.com/Phoder1/AsyncManagement.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.addressables": "1.19.11",
     "com.unity.collab-proxy": "1.13.5",
