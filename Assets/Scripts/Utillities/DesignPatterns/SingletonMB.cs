@@ -1,9 +1,23 @@
-using System;
 using UnityEngine;
 
 namespace WizardParty
 {
-    public class Singleton<T> : MonoBehaviour where T : Singleton<T> 
+    public class Singleton<T> where T : Singleton<T>, new()
+    {
+        private static T instance;
+        private Singleton() { }
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new();
+
+                return instance;
+            }
+        }
+    }
+    public abstract class SingletonMB<T> : MonoBehaviour where T : SingletonMB<T>, new()
     {
         private static T instance;
         public static T Instance

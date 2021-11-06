@@ -24,7 +24,9 @@ namespace WizardParty.Patterns
         #region Interface
         public void Subscribe(T subscriber)
         {
-            if (!_subscribers.Contains(subscriber))
+            if (_doingAction.Locked)
+                _subChanges.Enqueue((subscriber, true));
+            else
                 Add(subscriber);
         }
         public void Unsubscribe(T subscriber)
@@ -68,7 +70,8 @@ namespace WizardParty.Patterns
         }
         private void Add(T subscriber)
         {
-            _subscribers.Add(subscriber);
+            if (!_subscribers.Contains(subscriber))
+                _subscribers.Add(subscriber);
         }
         #endregion
     }
