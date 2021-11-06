@@ -1,5 +1,5 @@
 {
-    "name": "ComboWizardControls",
+    "name": "WizardPartyControls",
     "maps": [
         {
             "name": "Locomotion",
@@ -10,15 +10,24 @@
                     "type": "Value",
                     "id": "a1adc656-b353-4223-a47e-8b3830aa3b68",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "c28439a0-eb0c-44a8-a6e7-edd8cf0cd311",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "2D Vector",
-                    "id": "c92f72ed-ea2f-4182-915f-3f593f626d33",
+                    "id": "c3155848-e0e0-46ed-a341-ea516ecc5831",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -29,7 +38,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "25f8a0fd-eda4-4545-92fb-f970574d780b",
+                    "id": "96475828-9fff-4197-bb09-63971aef1d26",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -40,7 +49,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "26db0792-2ba5-49bf-85b6-c7bd01e7782d",
+                    "id": "29cc5aad-af6e-4290-acbb-908e57925ba5",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -51,7 +60,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "844b7569-aed2-4402-bb1f-817f2b805099",
+                    "id": "a5e26bea-94b0-486c-9790-55f8ef83728a",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -62,7 +71,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "3b2b7ae9-fce6-44f1-a6a3-2cf5d0deddd6",
+                    "id": "7c569ba4-d82a-4f93-946f-95772c7f5d44",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -70,6 +79,45 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a4911387-9e59-44b8-beed-cec72db1d0e4",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Gameplay",
+            "id": "e7b5e9a4-9cfb-4682-8e2c-cbf857fde454",
+            "actions": [
+                {
+                    "name": "Mouse",
+                    "type": "Value",
+                    "id": "12393369-9251-4b95-8543-2c060831cff7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e5509ead-bbce-4a35-ad2c-ac1717cbc541",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

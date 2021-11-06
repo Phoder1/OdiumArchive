@@ -1,18 +1,29 @@
+using Phoder1.AsyncManagement;
 using Sirenix.OdinInspector;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace WizardParty.Async
+namespace WizardParty
 {
     public class AsyncTests : AsyncBehaviour
     {
+        private CancellationTokenSource _source = new();
         // Start is called before the first frame update
-        async void Start()
+        [Button]
+        void StartCount()
         {
-            await AsyncManager.GlobalTaskGroup.StartTask(LogSeconds);
-            TaskHelper.DebugAsyncLog("Finished!");
+            _ = AsyncManager.StartTaskGlobally(LogSeconds, _source.Token);
+        }
+        [Button]
+        private void StopCount()
+        {
+            using (_source)
+            {
+                _source.Cancel();
+            }
+            _source = new();
         }
         [Button]
         private void Destroy()

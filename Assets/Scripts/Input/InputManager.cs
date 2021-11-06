@@ -1,21 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
+using UnityEngine.InputSystem;
 
 namespace WizardParty.Input
 {
-    public class InputManager : MonoBehaviour
+    public static class InputManager
     {
-        // Start is called before the first frame update
-        void Start()
+        private static readonly WizardPartyControls _controls = new();
+        public static WizardPartyControls Controls => _controls;
+        static InputManager()
         {
-        
+            _controls.Enable();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public static InputAction FindAction(Guid guid) => Controls.asset.FindAction(guid);
     }
 }

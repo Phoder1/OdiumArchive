@@ -9,9 +9,9 @@ namespace WizardParty.Async
     public delegate Task TaskFunc(CancellationToken token);
     public static class AsyncManager
     {
-        public static TaskGroup GlobalTaskGroup = new TaskGroup();
+        private static TaskGroup GlobalTaskGroup = new TaskGroup();
         public static CancellationToken GlobalToken => GlobalTaskGroup.Token;
-        public static TaskGroup SceneTaskGroup = new TaskGroup();
+        private static TaskGroup SceneTaskGroup = new TaskGroup();
         public static CancellationToken SceneToken => SceneTaskGroup.Token;
         static AsyncManager()
         {
