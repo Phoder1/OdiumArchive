@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
-using Phoder1.AsyncManagement;
 
 namespace WizardParty.Input.Runtime
 {
