@@ -21,13 +21,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.phoder1.asyncmanagement": {
-      "version": "https://github.com/Phoder1/AsyncManagement.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ce580838ee9efb3aa40108ffcd5904e8878916e7"
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
