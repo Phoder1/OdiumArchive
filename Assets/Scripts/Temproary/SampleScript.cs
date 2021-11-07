@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace WizardParty
 {
-    public class SampleScript : MonoBehaviour
+    [Serializable]
+    public class SampleScript : ILogic
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-            transform.DOMove(transform.position + Vector3.up * 3, 1);
-        }
+        [SerializeField]
+        private string m_Name = "NICE";
+    }
+    public interface ILogic
+    {
     }
 }

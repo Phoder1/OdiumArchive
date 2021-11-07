@@ -5,60 +5,122 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
 namespace WizardParty.AddressablesManagement
 {
     public class AddressableTest : MonoBehaviour
     {
+        [SerializeReference]
+        ILogic _logic;
 
         [SerializeField]
-        AssetLabelReference[] _labelRefs;
-        public List<IResourceLocation> AssetLocation1 { get; set; }
-   
-        public List<GameObject> objects = new List<GameObject>();
+        private GameObject _capsulePrefab;
 
-        GameObject _object;
-        [Button()]
-        public async void LoadObject1()
+        [SerializeField]
+        AssetLabelReference _label;
+
+        IList<IResourceLocation> _locations;
+
+        [SerializeField]
+        AssetReference _scene;
+
+        bool _loadingScene = false;
+
+        GameObject _prefab;
+        List<GameObject> _instanceGO = new List<GameObject>();
+        [Button]
+        private async void GetLocation()
         {
-            
-            if (_object == null)
+            _locations = await _label.LoadLocationsAsync();
+        }
+        [Button]
+        private async void LoadOnceAndInstantiate()
+        {
+            if (!await TryLoadPrefab())
+                return;
+
+            Instantiate(_prefab);
+        }
+
+        [Button]
+        private async void InstantiatePrefabThroughAddressables()
+        {
+            if (_locations == null)
+                return;
+
+            if (!await TryLoadPrefab())
+                return;
+
+            _instanceGO.Add(await _locations[0].InstantiateAsync());
+        }
+        [Button]
+        private async void LoadNextScene()
+        {
+            if (_loadingScene)
+                return;
+
+            _loadingScene = true;
+
+            await (await _scene.LoadLocationsAsync())[0].LoadSceneAsync();
+            ClearMemory();
+            Debug.Log("Scene loaded!");
+        }
+        [Button]
+        private async void ReloadScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        [Button]
+        private void UnloadAssets()
+        {
+            AddressablesManager.UnloadUnusedAssets();
+        }
+
+        [Button]
+        private void ClearMemory()
+        {
+            if (_instanceGO != null)
             {
-                AssetLocation1 = new List<IResourceLocation>();
-              await  AddressableHandler.LoadResourceLocationsAsync(AssetLocation1, _labelRefs[0]);
-                _object = await Addressables.LoadAssetAsync<GameObject>(AssetLocation1[0]).Task;
-                
+                while (_instanceGO.Count > 0)
+                {
+                    _instanceGO[0].ReleaseInstance();
+
+                    _instanceGO.RemoveAt(0);
+                }
             }
 
-          Instantiate(_object);
-         
+            if (_locations != null)
+            {
+                _locations.Release();
+                _locations = null;
+            }
+
+            if (_prefab != null)
+            {
+                _prefab.ReleaseInstance();
+                _prefab = null;
+            }
         }
 
-        [Button()]
-        public void ReleaseMemory()
+        private async Task<bool> TryLoadPrefab()
         {
-            Addressables.Release(AssetLocation1);
-        } 
-        [Button()]
-        public void ReleaseMemoryAndDestroy()
-        {
-        
-            Addressables.ReleaseInstance(_object);
-           Addressables.Release(AssetLocation1);
+            if (_prefab != null)
+                return true;
+            if (_locations == null)
+                return false;
+            foreach (var location in _locations)
+                _prefab = await Addressables.LoadAssetAsync<GameObject>(location).Task;
+
+
+            return _prefab != null;
         }
-
-        [Button()]
-        public void LoadScene(int scene)
-            => Addressables.LoadSceneAsync(scene);
-
 
         private void OnDestroy()
         {
-            ReleaseMemory();
+            ClearMemory();
         }
-
-
     }
 
 
