@@ -12,6 +12,7 @@
     "com.unity.inputsystem": "1.1.1",
     "com.unity.memoryprofiler": "0.4.2-preview.1",
     "com.unity.postprocessing": "3.1.1",
+    "com.unity.render-pipelines.high-definition": "12.1.0",
     "com.unity.render-pipelines.universal": "12.1.0",
     "com.unity.test-framework": "1.1.30",
     "com.unity.textmeshpro": "3.0.6",
