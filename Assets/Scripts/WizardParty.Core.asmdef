@@ -2,7 +2,9 @@
     "name": "WizardParty.Core",
     "rootNamespace": "WizardParty.Core",
     "references": [
-        "GUID:19a9b407c516c1041a80ff5100bc4ded"
+        "GUID:19a9b407c516c1041a80ff5100bc4ded",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
