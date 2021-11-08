@@ -12,6 +12,6 @@ namespace WizardParty.Input
             _controls.Enable();
         }
 
-        public static InputAction FindAction(Guid guid) => Controls.asset.FindAction(guid);
+        public static InputAction FindAction(this Guid guid) => guid == Guid.Empty ? null : Controls.asset.FindAction(guid);
     }
 }

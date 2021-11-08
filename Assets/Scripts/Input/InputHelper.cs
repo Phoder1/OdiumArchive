@@ -14,6 +14,8 @@ namespace WizardParty.Input
             => map.IsValid() && map.enabled;
         public static bool IsValid(this InputActionMap map)
             => map != null && map.actions.Count != 0;
+        public static bool IsValid(this WizardPartyInput input)
+            => input != null && input.InputAction.IsValid();
         public static Type GetReturnType(this InputAction action)
         {
             switch (action.type)
@@ -24,9 +26,12 @@ namespace WizardParty.Input
                     {
                         case "Vector2":
                             return typeof(Vector2);
-                        default:
-                            Debug.LogError($"New control type has been added of type: {action.expectedControlType}");
+                        case "Integer":
+                            return typeof(int);
+                        case "":
                             return typeof(void);
+                        default:
+                            throw new NotImplementedException($"New control type has been added of type: {action.expectedControlType}");
                     }
 
                 case InputActionType.Button:
@@ -38,8 +43,7 @@ namespace WizardParty.Input
                 default:
                     return typeof(void);
             }
-
-
         }
+        public static Guid ToGuid(this string guid) => (!string.IsNullOrWhiteSpace(guid) && Guid.TryParse(guid, out var output)) ? output : Guid.Empty;
     }
 }

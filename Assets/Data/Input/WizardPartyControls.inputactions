@@ -13,15 +13,6 @@
                     "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Roll",
-                    "type": "Button",
-                    "id": "c28439a0-eb0c-44a8-a6e7-edd8cf0cd311",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -79,17 +70,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "a4911387-9e59-44b8-beed-cec72db1d0e4",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -114,7 +94,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
