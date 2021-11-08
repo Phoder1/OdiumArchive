@@ -6,6 +6,7 @@ namespace WizardParty.Input
 {
     public static class InputHelper
     {
+        #region Extension methods
         public static bool IsValid(this InputAction action)
             => action != null && action.bindings.Count != 0;
         public static bool IsValidAndEnabled(this InputAction action)
@@ -45,5 +46,7 @@ namespace WizardParty.Input
             }
         }
         public static Guid ToGuid(this string guid) => (!string.IsNullOrWhiteSpace(guid) && Guid.TryParse(guid, out var output)) ? output : Guid.Empty;
+        public static InputAction FindAction(this Guid guid) => guid == Guid.Empty ? null : InputManager.Controls.asset.FindAction(guid);
+        #endregion
     }
 }

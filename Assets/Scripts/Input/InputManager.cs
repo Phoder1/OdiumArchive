@@ -1,17 +1,18 @@
-using System;
-using UnityEngine.InputSystem;
-
 namespace WizardParty.Input
 {
     public static class InputManager
     {
-        private static readonly WizardPartyControls _controls = new();
+        #region Properties
         public static WizardPartyControls Controls => _controls;
+        #endregion
+        #region Class Data
+        private static readonly WizardPartyControls _controls = new();
+        #endregion
+        #region Constructors
         static InputManager()
         {
             _controls.Enable();
         }
-
-        public static InputAction FindAction(this Guid guid) => guid == Guid.Empty ? null : Controls.asset.FindAction(guid);
+        #endregion
     }
 }

@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 77434568}
   - component: {fileID: 77434567}
   - component: {fileID: 77434566}
-  - component: {fileID: 77434570}
   - component: {fileID: 77434571}
   - component: {fileID: 77434573}
   - component: {fileID: 77434574}
@@ -311,19 +310,6 @@ Transform:
   m_Father: {fileID: 1076551624}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &77434570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77434564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744add74bbe67394799b447ff623ed17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _debuggingEnabled: 1
 --- !u!114 &77434571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10329,7 +10315,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputs:
   - rid: 4438714340743577636
-  - rid: 4438714340743577637
   _input:
     _input: 
   references:
@@ -10348,24 +10333,19 @@ MonoBehaviour:
             m_Calls: []
         OnUpdate:
           m_PersistentCalls:
-            m_Calls: []
-        OnCanceled:
-          m_PersistentCalls:
-            m_Calls: []
-    - rid: 4438714340743577637
-      type: {class: InputCallbacksVector2, ns: WizardParty.Input, asm: WizardParty.Input}
-      data:
-        _input:
-          _input: 12393369-9251-4b95-8543-2c060831cff7
-        OnStarted:
-          m_PersistentCalls:
-            m_Calls: []
-        OnPerformed:
-          m_PersistentCalls:
-            m_Calls: []
-        OnUpdate:
-          m_PersistentCalls:
-            m_Calls: []
+            m_Calls:
+            - m_Target: {fileID: 930581657}
+              m_TargetAssemblyTypeName: WizardParty.Core.SimpleMove, WizardParty.Core
+              m_MethodName: MoveToawrds
+              m_Mode: 0
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
         OnCanceled:
           m_PersistentCalls:
             m_Calls: []

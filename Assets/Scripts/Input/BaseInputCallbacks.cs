@@ -9,7 +9,7 @@ namespace WizardParty.Input
     [Serializable]
     public abstract class BaseInputCallbacks
     {
-        #region State
+        #region Serielized
         [SerializeField]
         private WizardPartyInput _input;
         #endregion

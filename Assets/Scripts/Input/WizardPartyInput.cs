@@ -11,16 +11,21 @@ namespace WizardParty.Input
     [Serializable, InlineProperty]
     public class WizardPartyInput
     {
-        [SerializeField, InputDropdown, HideLabel, OnValueChanged(nameof(Reset))]
+        #region Serielized
+        [SerializeField, InputDropdown, HideLabel, OnValueChanged("Reset")]
         private string _input;
-        public string GuidString => _input;
-
+        #endregion
+        #region Class Data
         private Guid _guid;
+        private InputAction _inputAction;
+        #endregion
+        #region Properties
+        public string GuidString => _input;
         public Guid ID
         {
             get
             {
-                if(_guid == Guid.Empty)
+                if (_guid == Guid.Empty)
                 {
                     if (string.IsNullOrWhiteSpace(GuidString))
                         return Guid.Empty;
@@ -31,12 +36,11 @@ namespace WizardParty.Input
                 return _guid;
             }
         }
-        private InputAction _inputAction;
         public InputAction InputAction
         {
             get
             {
-                if(_inputAction == null || _inputAction.actionMap == null)
+                if (_inputAction == null || _inputAction.actionMap == null)
                 {
                     if (ID == Guid.Empty)
                         return null;
@@ -47,6 +51,8 @@ namespace WizardParty.Input
                 return _inputAction;
             }
         }
+        #endregion
+        #region Editor
 #if UNITY_EDITOR
         private void Reset()
         {
@@ -54,5 +60,6 @@ namespace WizardParty.Input
             _inputAction = null;
         }
 #endif
+        #endregion
     }
 }
